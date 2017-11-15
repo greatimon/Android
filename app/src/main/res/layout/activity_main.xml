@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:id="@+id/activity_main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="io.realm.draw.MainActivity">
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="#FFFFFF">-->
+
+        <!--<ProgressBar-->
+            <!--style="?android:attr/progressBarStyleLarge"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerInParent="true"/>-->
+
+    <!--</RelativeLayout>-->
+
+    <!--<uk.co.senab.photoview.PhotoView-->
+        <!--android:id="@+id/send_img"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:clickable="true"-->
+        <!--tools:src="@drawable/back_6"-->
+        <!--android:scaleType="centerInside" />-->
+
+
+    <!--서피스뷰 뒤에 이미지뷰를 놓고 투명하게 했던 방식-->
+    <FrameLayout
+        android:id="@+id/surfaceViewGroup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="140dp">
+
+        <ImageView
+            android:id="@+id/back_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/back_6"
+            android:scaleType="centerCrop"/>
+
+        <SurfaceView
+            android:id="@+id/surface_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </FrameLayout>
+
+    <!--서피스뷰 자체에 백그라운드 이미지를 넣은 방식-->
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/include_surView_REL"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginBottom="140dp">-->
+
+        <!--<SurfaceView-->
+            <!--android:id="@+id/surface_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"/>-->
+
+    <!--</RelativeLayout>-->
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/delete_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_above="@+id/stroke_alpha_bar"
+            android:onClick="delete_btn_clicked"
+            android:text="delete"/>
+
+        <Button
+            android:id="@+id/toBitmap"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:layout_above="@+id/stroke_alpha_bar"
+            android:layout_alignParentRight="true"
+            android:onClick="toBitmap_btn_clicked"
+            android:text="to_Bitmap"/>
+
+        <ImageView
+            android:id="@+id/test_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_above="@+id/stroke_alpha_bar"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"/>
+
+
+        <LinearLayout
+            android:id="@+id/stroke_alpha_bar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_above="@+id/pencil_layout"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="stroke_width"
+                    android:textColor="#686868"/>
+
+                <SeekBar
+                    android:id="@+id/slider_thickness"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="stroke_alpha"
+                    android:textColor="#686868"/>
+
+                <SeekBar
+                    android:id="@+id/slider_alpha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--<Button-->
+            <!--android:id="@+id/increase_strokeWitdh"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:layout_toRightOf="@+id/delete_btn"-->
+            <!--android:layout_above="@+id/pencil_layout"-->
+            <!--android:onClick="increase_strokeWitdh"-->
+            <!--android:text="Width +"/>-->
+        <!--<Button-->
+            <!--android:id="@+id/decrease_strokeAlpha"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:layout_toRightOf="@+id/increase_strokeWitdh"-->
+            <!--android:layout_above="@+id/pencil_layout"-->
+            <!--android:onClick="decrease_strokeAlpha"-->
+            <!--android:text="Alpha -"/>-->
+
+        <LinearLayout
+            android:id="@+id/pencil_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true">
+
+            <io.realm.draw.PencilView
+                android:id="@+id/charcoal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:src="@drawable/charcoal"/>
+
+            <io.realm.draw.PencilView
+                android:id="@+id/elephant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:src="@drawable/elephant"/>
+
+            <io.realm.draw.PencilView
+                android:id="@+id/indigo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:src="@drawable/indigo"/>
+
+            <io.realm.draw.PencilView
+                android:id="@+id/dove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:src="@drawable/dove"/>
+
+            <io.realm.draw.PencilView
+                android:id="@+id/ultramarine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:src="@drawable/ultramarine"/>
+
+
+            <io.realm.draw.PencilView
+                android:id="@+id/grape_jelly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:src="@drawable/grape_jelly"/>
+
+            <io.realm.draw.PencilView
+                android:id="@+id/mulberry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:src="@drawable/mulberry"/>
+
+            <io.realm.draw.PencilView
+                android:id="@+id/sexy_salmon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:src="@drawable/sexy_salmon"/>
+
+            <io.realm.draw.PencilView
+                android:id="@+id/peach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:src="@drawable/peach"/>
+
+            <io.realm.draw.PencilView
+                android:id="@+id/flamingo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:src="@drawable/flamingo"/>
+
+            <io.realm.draw.PencilView
+                android:id="@+id/melon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="1dp"
+                android:src="@drawable/melon"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>

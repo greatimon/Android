@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
+
+android {
+    compileSdkVersion 27
+    buildToolsVersion '27.0.0'
+    defaultConfig {
+        applicationId "io.realm.draw"
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        def host = InetAddress.getLocalHost().getCanonicalHostName()
+        debug {
+            // This will automatically detect the IP address of the machine building RealmTasks.
+            // It is assumed that this machine is also running the Object Server.
+            // If not, replace 'host' with the IP of the machine hosting the server.
+            buildConfigField "String", "OBJECT_SERVER_IP", "\"${host}\""
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // This will automatically detect the IP address of the machine building RealmTasks.
+            // It is assumed that this machine is also running the Object Server.
+            // If not, replace 'host' with the IP of the machine hosting the server.
+            buildConfigField "String", "OBJECT_SERVER_IP", "\"${host}\""
+        }
+    }
+}
+
+dependencies {
+    //noinspection GradleCompatible
+    compile 'com.android.support:appcompat-v7:27.0.1'
+    // 포토뷰
+    compile 'com.commit451:PhotoView:1.2.4'
+    // 글라이드
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
+    compile 'jp.wasabeef:glide-transformations:2.0.2'
+    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
+    // Ted 퍼미션(권한관련 라이브러리)
+    compile 'gun0912.ted:tedpermission:1.0.2'
+
+    configurations {
+         all*.exclude group: 'com.android.support', module: 'support-v4'
+    }
+}
+
+realm {
+    syncEnabled = true
+}
